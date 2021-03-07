@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Text;
 using Business.Abstract;
 using DataAccess.Abstract;
+using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
 
 namespace Business.Concrete
 {
     public class CarManager : ICarService
     {
-        ICarDal _carDal;
+        private ICarDal _carDal;
 
         public CarManager(ICarDal carDal)
         {
@@ -21,24 +22,24 @@ namespace Business.Concrete
             return _carDal.GetAll();
         }
 
-        public List<Car> GetById(int id, int brandId, int colorId)
+        public List<Car> GetById(int id)
         {
-            return GetById(id, brandId, colorId);
-        }
-        
-        public void Add(Car car)
-        {
-            _carDal.Add(car);
+            return _carDal.GetAll(c => c.Id == id);
         }
 
-        public void Delete(Car car)
+        public List<Car> GetByDailyPrice(decimal min, decimal max)
         {
-            _carDal.Delete(car);
+            return _carDal.GetAll(c=> c.DailyPrice >= min && c.DailyPrice <=max);
         }
 
-        public void Update(Car car)
+        public List<Car> GetByBrandId(int brandId)
         {
-            _carDal.Update(car);
+            return _carDal.GetAll(c => c.BrandId == brandId);
+        }
+
+        public List<Car> GetByColorId(int colorId)
+        {
+            return _carDal.GetAll(c => c.ColorId == colorId);
         }
     }
 }
