@@ -18,24 +18,37 @@ namespace Business.Concrete
 
         public List<Brand> GetAll()
         {
-            return null;
+            return _brandDal.GetAll();
         }
 
-        public Brand GetById(int id)
+        public Brand GetById(int brandId)
         {
-            return null;
+            return _brandDal.Get(co => co.BrandId == brandId);
         }
 
         public void Add(Brand brand)
         {
+            
+            _brandDal.Add(brand);
         }
 
-        public void Delete(Brand brand)
+        public void Delete(int brandId)
         {
+            var result = _brandDal.Get(b => b.BrandId == brandId);
+            if (result != null)
+            {
+                _brandDal.Delete(result);
+                Console.WriteLine("Brand details has been deleted.");
+            }
+            else
+            {
+                Console.WriteLine("There is no brand with this ID.");
+            }
         }
 
         public void Update(Brand brand)
         {
+            _brandDal.Update(brand);
         }
     }
 }

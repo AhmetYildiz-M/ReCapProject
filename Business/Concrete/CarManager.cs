@@ -46,11 +46,12 @@ namespace Business.Concrete
 
         public List<CarDetailDto> GetCarDetails()
         {
-            return null;
+            return _carDal.GetCarDetails();
         }
 
         public void Add(Car car)
         {
+            
             if (car.CarName.Length > 2 && car.DailyPrice > 0)
             {
                 _carDal.Add(car);
@@ -58,12 +59,28 @@ namespace Business.Concrete
             
         }
 
-        public void Delete(Car car)
+        public void Delete(int id)
         {
+            var result = _carDal.Get(c=>c.Id == id);
+            if (result != null)
+            {
+
+                _carDal.Delete(result);
+                Console.WriteLine("The car is deleted from the list");
+            }
+            else
+            {
+                Console.WriteLine("The is not deleted because Id is not founded.");
+            }
         }
 
-        public void update(Car car)
+        public void Update(Car car)
         {
+            _carDal.Update(car);
+                Console.WriteLine("The car information has been updated");
+            
+            
         }
+
     }
 }

@@ -17,25 +17,37 @@ namespace Business.Concrete
        }
 
        public List<Color> GetAll()
-        {
-            return null;
-        }
+       {
+           return _colorDal.GetAll();
+       }
 
         public Color GetById(int colorId)
         {
-            return null;
+            return _colorDal.Get(co => co.ColorId == colorId);
         }
 
         public void Add(Color color)
         {
+            _colorDal.Add(color);
         }
 
-        public void Delete(Color color)
+        public void Delete(int id)
         {
+            var result = _colorDal.Get(co => co.ColorId == id);
+            if (result != null)
+            {
+                _colorDal.Delete(result);
+                Console.WriteLine("Color details has been deleted.");
+            }
+            else
+            {
+                Console.WriteLine("There is no color with this ID.");
+            }
         }
 
         public void Update(Color color)
         {
+            _colorDal.Update(color);
         }
         
     }
