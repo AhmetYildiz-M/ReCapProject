@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 
@@ -16,39 +18,48 @@ namespace Business.Concrete
            _colorDal = colorDal;
        }
 
-       public List<Color> GetAll()
-       {
-           return _colorDal.GetAll();
-       }
-
-        public Color GetById(int colorId)
+        public IDataResult<List<Color>> GetAll()
         {
-            return _colorDal.Get(co => co.ColorId == colorId);
-        }
-
-        public void Add(Color color)
-        {
-            _colorDal.Add(color);
-        }
-
-        public void Delete(int id)
-        {
-            var result = _colorDal.Get(co => co.ColorId == id);
-            if (result != null)
+            if (DateTime.Now.Hour == 23)
             {
-                _colorDal.Delete(result);
-                Console.WriteLine("Color details has been deleted.");
+                return new ErrorDataResult<List<Color>>(Messages.MaintenanceTime);
             }
             else
             {
-                Console.WriteLine("There is no color with this ID.");
+                return new SuccessDataResult<List<Color>>(_colorDal.GetAll(), Messages.BrandListed);
             }
         }
 
-        public void Update(Color color)
+        public IDataResult<Color> GetById(int colorId)
         {
-            _colorDal.Update(color);
+            return new SuccessDataResult<Color>(_colorDal.Get(co => co.ColorId == colorId));
         }
-        
+
+        public IResult Add(Color color)
+        {
+            if (color.ColorName.Length < 2)
+            {
+                return new ErrorResult(Messages.ColorIdInvalid);
+            }
+            _colorDal.Add(color);
+            return new SuccessResult(Messages.ColorIsAdded);
+        }
+
+
+        public IResult Delete(Color color)
+        {            
+            _colorDal.Delete(color);
+            return new SuccessResult(Messages.ColorIsDeleted);
+        }
+
+        public IResult Update(Color color)
+        {
+            if (color.ColorId!=color.ColorId)
+            {
+                return new ErrorResult(Messages.ColorIdInvalid);
+            }
+            _colorDal.Update(color);
+            return new SuccessResult(Messages.ColorIsUpdated);
+        }
     }
 }

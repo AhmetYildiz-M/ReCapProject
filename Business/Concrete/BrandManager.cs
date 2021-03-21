@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 
@@ -16,39 +18,48 @@ namespace Business.Concrete
             _brandDal = brandDal;
         }
 
-        public List<Brand> GetAll()
-        {
-            return _brandDal.GetAll();
-        }
 
-        public Brand GetById(int brandId)
+        public IDataResult<List<Brand>> GetAll()
         {
-            return _brandDal.Get(co => co.BrandId == brandId);
-        }
-
-        public void Add(Brand brand)
-        {
-            
-            _brandDal.Add(brand);
-        }
-
-        public void Delete(int brandId)
-        {
-            var result = _brandDal.Get(b => b.BrandId == brandId);
-            if (result != null)
+            if (DateTime.Now.Hour==20)
             {
-                _brandDal.Delete(result);
-                Console.WriteLine("Brand details has been deleted.");
+                return new ErrorDataResult<List<Brand>>(Messages.MaintenanceTime);
             }
             else
             {
-                Console.WriteLine("There is no brand with this ID.");
+                return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(),Messages.BrandListed);
             }
         }
 
-        public void Update(Brand brand)
-        {
-            _brandDal.Update(brand);
+        public IDataResult<Brand> GetById(int brandId)
+        {            
+            return new SuccessDataResult<Brand>(_brandDal.Get(b => b.BrandId == brandId));            
         }
+            
+        public IResult Add(Brand brand)
+        {
+            if (brand.BrandName.Length < 2)
+            {
+                return new ErrorResult(Messages.BrandIdInvalid);
+            }
+            _brandDal.Add(brand);
+            return new SuccessResult(Messages.BrandIsAdded);
+        }
+
+
+        public IResult Delete(Brand brand)
+        {
+            
+            _brandDal.Delete(brand);
+            return new SuccessResult(Messages.BrandIsDeleted);
+        }
+
+        public IResult Update(Brand brand)
+        {                        
+            _brandDal.Update(brand);
+            return new SuccessResult(Messages.BrandIsUpdated);          
+            
+        }
+
     }
 }
