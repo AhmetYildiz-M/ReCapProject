@@ -28,9 +28,9 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(),Messages.ProductListed);
         }
 
-        public IDataResult<Car> GetById(int id)
+        public IDataResult<Car> GetById(int carId)
         {
-            return new SuccessDataResult<Car>(_carDal.Get(c => c.Id == id));
+            return new SuccessDataResult<Car>(_carDal.Get(c => c.CarId == carId));
         }
 
         public IDataResult<List<Car>> GetByDailyPrice(decimal min, decimal max)

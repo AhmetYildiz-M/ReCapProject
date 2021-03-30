@@ -54,7 +54,7 @@ namespace Business.Concrete
 
         public IResult Update(Color color)
         {
-            if (color.ColorId!=color.ColorId)
+            if (color.ColorId != color.ColorId)
             {
                 return new ErrorResult(Messages.ColorIdInvalid);
             }

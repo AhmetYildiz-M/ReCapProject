@@ -15,42 +15,25 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
             //CarDeleteTest();
-
             //GetCarsColorIdTest();
-
-            //GetCarBrandIdTest();
-
+            GetCarBrandIdTest();
             //GetCarsDailyPriceTest();
-
             //CarUpdateTest();
             //CarAddTest();
 
 
             //ColotGetAllTest();
-
             //ColorGetByIdTest();
-
             //ColorAddTest();
-
             //ColorDeleteTest();
-
             //ColorUpdateTest();
 
 
-
-
             //BrandGetAllTest();
-
             //BrandGetByIdTest();
-
             //BrandAddTest();
-
             //BrandDeleteTest();
-
             //BrandUpdateTest();
-
-
-
         }
 
        
@@ -167,7 +150,7 @@ namespace ConsoleUI
             CarManager carManager = new CarManager(new EfCarDal());
             var result = carManager.Update(new Car()
             {
-                Id = 5,
+                CarId = 5,
                 BrandId = 3,
                 ColorId = 3,
                 CarName = "BMW",
@@ -185,7 +168,7 @@ namespace ConsoleUI
         private static void CarDeleteTest()
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            var result = carManager.Delete(new Car { Id = 4 });
+            var result = carManager.Delete(new Car { CarId = 4 });
             if (result.Success)
             {
                 Console.WriteLine(result.Message);
