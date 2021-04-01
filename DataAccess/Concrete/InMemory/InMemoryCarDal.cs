@@ -75,5 +75,10 @@ namespace DataAccess.Concrete.InMemory
             throw new NotImplementedException();
         }
 
+        public List<RentalDetailDto> GetRentalDetails()
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

@@ -37,7 +37,7 @@ namespace Business.Concrete
 
         public IResult Add(Customer customer)
         {
-            if (customer.FirstName.Length < 2  && customer.CompanyName != null )
+            if (customer.CompanyName != null )
             {
                 return new ErrorResult(Messages.CustomerIdInvalid);
             }

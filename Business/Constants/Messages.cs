@@ -38,7 +38,7 @@ namespace Business.Constants
         public static string CustomerIsUpdated = "Customer is updated";
         public static string CustomerListed = "Customers are listed";
 
-        public static string RentalIsAdded = "Customer is added";
+        public static string RentalIsAdded = "New rental is added";
         public static string RentalIdInvalid = "Customer's ID is invalid";
         public static string RentalIsDeleted = "Customer is deleted";
         public static string RentalIsUpdated = "Customer is updated";

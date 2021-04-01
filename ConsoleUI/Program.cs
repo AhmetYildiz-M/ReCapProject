@@ -16,7 +16,7 @@ namespace ConsoleUI
         {
             //CarDeleteTest();
             //GetCarsColorIdTest();
-            GetCarBrandIdTest();
+            //GetCarBrandIdTest();
             //GetCarsDailyPriceTest();
             //CarUpdateTest();
             //CarAddTest();
@@ -34,14 +34,34 @@ namespace ConsoleUI
             //BrandAddTest();
             //BrandDeleteTest();
             //BrandUpdateTest();
+
+            //RentalStatusAddMethod();
+
         }
 
-       
+        private static void RentalStatusAddMethod()
+        {
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+
+            var result = rentalManager.Add(new Rental() { CarId = 8, CustomerId = 3, RentDate = new DateTime(2021, 03, 12), ReturnDate = new DateTime(2021, 03, 15) });
+                
+                if (result.Success)
+                {
+                    Console.WriteLine(result.Message);
+                }
+                else
+                {
+                    Console.WriteLine(result.Message);
+                }
+           
+            
+        }
+
 
         private static void BrandUpdateTest()
         {
             BrandManager brandManager = new BrandManager(new EfBrandDal());
-            var result = brandManager.Update(new Brand { BrandId = 5, BrandName = "Lamborgini" });
+            var result = brandManager.Update(new Brand { BrandId = 5, BrandName = "Mercedes" });
             if (result.Success)
             {
                 Console.WriteLine(result.Message);
@@ -178,13 +198,13 @@ namespace ConsoleUI
         private static void GetCarBrandIdTest()
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            var result = carManager.GetCarsByBrandId(2);
+            var result = carManager.GetCarsByBrandId(4);
 
             if (result.Success)
             {
-                foreach (var car in carManager.GetCarsByBrandId(2).Data)
+                foreach (var car in carManager.GetCarsByBrandId(4).Data)
                 {
-                    Console.WriteLine(car.Description + " BrandId: " + car.BrandId);
+                    Console.WriteLine($"The car is listed with BrandId.\n {car.CarName}");
                 }
             }
             else
