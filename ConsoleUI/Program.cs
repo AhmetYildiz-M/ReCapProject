@@ -20,6 +20,8 @@ namespace ConsoleUI
             //GetCarsDailyPriceTest();
             //CarUpdateTest();
             //CarAddTest();
+            //GetAllCarsTest();
+            //GetCarsByIdTest();
 
 
             //ColotGetAllTest();
@@ -37,6 +39,32 @@ namespace ConsoleUI
 
             //RentalStatusAddMethod();
 
+
+
+        }
+
+        private static void GetCarsByIdTest()
+        {
+            CarManager carManager = new CarManager(new EfCarDal());
+            var result = carManager.GetById(2);
+
+            if (result.Success)
+            {
+                Console.WriteLine(carManager.GetById(2).Data.CarId + " " + carManager.GetById(2).Data.CarName);
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+        }
+
+        private static void GetAllCarsTest()
+        {
+            CarManager carManager = new CarManager(new EfCarDal());
+            foreach (var car in carManager.GetAll().Data)
+            {
+                Console.WriteLine(car.CarName);
+            }
         }
 
         private static void RentalStatusAddMethod()

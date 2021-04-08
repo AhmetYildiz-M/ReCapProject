@@ -53,11 +53,7 @@ namespace Business.Concrete
         }
 
         public IResult Update(User user)
-        {
-            if (user.UserId != user.UserId)
-            {
-                return new ErrorResult(Messages.UserIdInvalid);
-            }
+        {           
             _userDal.Update(user);
             return new SuccessResult(Messages.UserIsUpdated);
         }

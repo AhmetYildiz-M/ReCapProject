@@ -53,11 +53,7 @@ namespace Business.Concrete
         }
 
         public IResult Update(Customer customer)
-        {
-            if (customer.CustomerId != customer.CustomerId)
-            {
-                return new ErrorResult(Messages.CustomerIdInvalid);
-            }
+        {           
             _customerDal.Update(customer);
             return new SuccessResult(Messages.CustomerIsUpdated);
         }

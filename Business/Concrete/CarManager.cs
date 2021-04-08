@@ -45,12 +45,12 @@ namespace Business.Concrete
 
         public IDataResult<List<Car>> GetCarsByColorId(int colorId)
         {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == colorId));
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == colorId),Messages.ProductListedByColorId);
         }
 
         public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
-            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails());
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(),Messages.ProductDeteailIsListed);
         }
 
         public IResult Add(Car car)
@@ -70,6 +70,7 @@ namespace Business.Concrete
             _carDal.Delete(car);
             return new SuccessResult(Messages.ProductIsDeleted);
         }
+        
 
         public IResult Update(Car car)
         {            

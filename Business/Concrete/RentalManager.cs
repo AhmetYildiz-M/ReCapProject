@@ -59,18 +59,10 @@ namespace Business.Concrete
         }
 
         public IResult Update(Rental rental)
-        {
-            if (rental.RentalId != rental.RentalId)
-            {
-                return new ErrorResult(Messages.RentalIdInvalid);
-            }
+        {           
             _rentalDal.Update(rental);
             return new SuccessResult(Messages.RentalIsUpdated);
         }
-
-        //public IDataResult<List<RentalDetailDto>> GetRentalDetails()
-        //{
-        //    return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails());
-        //}
+        
     }
 }

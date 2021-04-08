@@ -14,7 +14,9 @@ namespace Business.Constants
         public static string ProductIdInvalid = "Car's ID is invalid";
         public static string ProductIsDeleted = "Car information is deleted";
         public static string ProductIsUpdated = "Car information is updated";
-        
+        public static string ProductListedByColorId = "Cars are listed with color ID.";
+        public static string ProductDeteailIsListed = "Car details are listed.";
+
         public static string ColorIsAdded = "Color is added";
         public static string ColorIdInvalid = "Color's ID is invalid";
         public static string ColorIsDeleted = "Color is deleted";

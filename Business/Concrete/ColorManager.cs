@@ -53,11 +53,7 @@ namespace Business.Concrete
         }
 
         public IResult Update(Color color)
-        {
-            if (color.ColorId != color.ColorId)
-            {
-                return new ErrorResult(Messages.ColorIdInvalid);
-            }
+        {            
             _colorDal.Update(color);
             return new SuccessResult(Messages.ColorIsUpdated);
         }
